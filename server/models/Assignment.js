@@ -25,21 +25,6 @@ class Assignment {
       throw(err)
     }
   }
-
-  async user() {
-    const userFile = await import("./User.js")
-    const User = userFile.default
-
-    try {
-      const query = 'SELECT * FROM users WHERE ID = $1'
-      const result = await pool.query(query, [this.userId])
-
-      return new User(result.rows[0])
-    } catch(err) {
-      console.log(err)
-      throw(err)
-    }
-  }
 }
 
 export default Assignment

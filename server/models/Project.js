@@ -41,45 +41,6 @@ class Project {
       throw(err)
     }
   }
-
-  async assignments() {
-    const assignmentFile = await import("./Assignment.js")
-    const Assignment = assignmentFile.default
-
-    try {
-      const query = 'SELECT * FROM assignments WHERE project_id = $1;'
-      const result = await pool.query(query, [this.id])
-
-      const relatedAssignments = result.rows.map(assignment => new Assignment(assignment))
-
-      return relatedAssignments
-    } catch(err) {
-      console.log(err)
-      throw(err)
-    }
-  }
-
-  async users() {
-    const userFile = await import("./User.js")
-    const User = userFile.default
-
-    try {
-      const assignments = await this.assignments()
-      
-      // NOTE: we use a `for` loop here to make sure async/await behaves properly
-      // const users = []
-      // for(let i = 0; i < assignments.length; i++) {
-      //   const user = await assignments[i].user()
-      //   users.push(user)
-      // }
-      const users = assignments.map(assignment => assignment.user())
-
-      return Promise.all(users)
-    } catch(err) {
-      console.log(err)
-      throw(err)
-    }
-  }
 }
 
 export default Project
