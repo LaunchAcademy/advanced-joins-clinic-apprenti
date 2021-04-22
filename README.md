@@ -44,4 +44,10 @@ UPDATE users SET manager_id = 3 WHERE id = 2;
 
 3. Update the model to relate the two: `User#manager` and `User#employees`.
 4. Update the API endpoint to add the manager for each employee.
+```
+for(let i = 0; i < project.users.length; i++) {
+  let currentUser = project.users[i]
+  currentUser.manager = await currentUser.manager()
+}
+```
 5. Add the manager's name to the page.
