@@ -7,10 +7,15 @@ projectsRouter.get('/:id', async (req, res) => {
   try {
     const project = await Project.findById(req.params.id)
     project.users = await project.users()
+
+    console.log(project.users)
+    // loop over project.users and get the manager for each
+    // nest it under the user
     for(let i = 0; i < project.users.length; i++) {
-      let currentUser = project.users[i]
-      currentUser.manager = await currentUser.manager()
+      const user = project.users[i]
+      user.manager = await user.manager()
     }
+    
     res.json({ project })
       //get and return a single adventure using the model
   } catch (error) {

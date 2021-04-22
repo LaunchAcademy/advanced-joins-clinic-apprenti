@@ -27,6 +27,19 @@ class User {
       throw(err)
     }
   }
+
+  async manager() {
+    try {
+      // find the user whose id matches my managerId
+      const query = 'SELECT * FROM users WHERE ID = $1'
+      const result = await pool.query(query, [this.managerId])
+
+      return new User(result.rows[0])
+    } catch(err) {
+      console.log(err)
+      throw(err)
+    }
+  }
 }
 
 export default User

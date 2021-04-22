@@ -26,7 +26,7 @@ const ProjectShow = (props) => {
   let assignedUsersSection
   if(project.users) {
     assignedUsersSection = project.users.map(user => {
-      return <li key={user.id}>{user.firstName} {user.lastName}</li>
+      return <li key={user.id}>{user.firstName} {user.lastName}, Manager: {user.manager.firstName} {user.manager.lastName}</li>
     })
   }
 

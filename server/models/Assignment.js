@@ -25,6 +25,23 @@ class Assignment {
       throw(err)
     }
   }
+
+  // assignment belongs to a user
+  async user() {
+    const userFile = await import("./User.js")
+    const User = userFile.default
+
+    try {
+      // find the user related to the assignment
+      const query = 'SELECT * FROM users WHERE ID = $1'
+      const result = await pool.query(query, [this.userId])
+      // turn it into a User Object
+      return new User(result.rows[0])
+    } catch(err) {
+      console.log(err)
+      throw(err)
+    }
+  }
 }
 
 export default Assignment
