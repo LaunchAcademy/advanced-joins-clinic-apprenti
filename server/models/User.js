@@ -5,12 +5,11 @@ const pool = new pg.Pool({
 })
 
 class User {
-  constructor({id, first_name, firstName, last_name, lastName, email, managerId, manager_id }) {
+  constructor({id, first_name, firstName, last_name, lastName, email }) {
     this.id = id
     this.firstName = firstName || first_name
     this.lastName = lastName || last_name
     this.email = email
-    this.managerId = managerId || manager_id
   }
 
   async save() {

@@ -19,7 +19,9 @@ class Seeder {
     await user3.save()
 
     const assignment = new Assignment({userId: user1.id, projectId: project.id})
+    const assignment2 = new Assignment({userId: user2.id, projectId: project.id})
     await assignment.save()
+    await assignment2.save()
   }
 }
 
